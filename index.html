@@ -214,7 +214,7 @@ function toggleCalls () {
         geojson_311 = L.geoJson(json_311, {
             onEachFeature: function (feature, layer) {
                 var dateOpened = new Date(feature.properties.requested_datetime);
-                layer.bindPopup('<strong>Case ID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_name:</strong> ' + feature.properties.service_name + '<br><strong>Request Type:</strong> ' + feature.properties.service_subtype + '<br><strong>Request Details:</strong> ' + feature.properties.request_details + '<br><strong>Status:</strong> ' + feature.properties.status + '<br><strong>Date Opened:</strong> ' + dateOpened);
+                layer.bindPopup('<strong>Case ID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_name:</strong> ' + feature.properties.service_name + '<br><strong>Request Type:</strong> ' + feature.properties.service_subtype + '<br><strong>Request Details:</strong> ' + feature.properties.service_details + '<br><strong>Status:</strong> ' + feature.properties.status_description + '<br><strong>Date Opened:</strong> ' + dateOpened);
             },
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
