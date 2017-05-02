@@ -31,7 +31,11 @@
 <body>
     <div id='map'></div>
     <div id='panel' class='pin-right pad1 dark fill-dark'>
+<<<<<<< HEAD
         <h2 class='fancy'>Homeless Issue Reports to SF111 in last week</h1>
+=======
+        <h1 class='fancy'>SF 311 Homeless Issues</h1>
+>>>>>>> b53bb356fd295d3b1f0eb9a665f59e5907d7dfcd
         <h5>past 7 days</h5>
         <div class='pad2 checkbox-pill'>
           <input type='checkbox' id='show-calls'>
@@ -39,10 +43,17 @@
         </div>
         <h2 id='neighborhood-name'></h2>
         <div><span id='total-calls'></span><span id='calls-label'> Homeless Reports</span></div>
+<<<<<<< HEAD
         <div id='issues' class='pad2y'><h2>Report Type</h2><ul id='issue-list'></ul></div>
 
         <div class='pin-bottom pad1x'>
             <h2>Data from <a href=https://data.sfgov.org/City-Infrastructure/homelessresearch/rs7u-hch9nod>DataSF</a></h2>
+=======
+        <div id='issues' class='pad2y'><h2>Top Issues</h2><ul id='issue-list'></ul></div>
+
+        <div class='pin-bottom pad1x'>
+            <h2>Data from <a href="http://data.sfgov.org">DataSF</a></h2>
+>>>>>>> b53bb356fd295d3b1f0eb9a665f59e5907d7dfcd
         </div>
     </div>
     <div id='legend' class='pin-bottomleft'>
@@ -170,6 +181,7 @@ function updateInfo (props,  neighborhoods_sffind_boundaries) {
 
         $('#issue-list').empty()
         var calls = turf.within(json_311, turf.featurecollection([ neighborhoods_sffind_boundaries]))
+<<<<<<< HEAD
         //get a unique hash of service_details counts
         var categories = {};
         calls.features.forEach(function(pt){
@@ -180,12 +192,27 @@ function updateInfo (props,  neighborhoods_sffind_boundaries) {
         //map hash keys to an array
         categories = Object.keys(categories).map(function(service_details){
             return {name: service_details, count: categories[service_details]};
+=======
+        //get a unique hash of service_name counts
+        var categories = {};
+        calls.features.forEach(function(pt){
+            if(!categories[pt.properties.service_name]) categories[pt.properties.service_name] = 1;
+            else categories[pt.properties.service_name]++;
+        });
+        //map hash keys to an array
+        categories = Object.keys(categories).map(function(service_name){
+            return {name: service_name, count: categories[service_name]};
+>>>>>>> b53bb356fd295d3b1f0eb9a665f59e5907d7dfcd
         });
         //sort categories in descending order
         categories.sort(function(a, b){
             return b.count - a.count;
         })
+<<<<<<< HEAD
         for(var i = 0; i < 9; i++) {
+=======
+        for(var i = 0; i < 5; i++) {
+>>>>>>> b53bb356fd295d3b1f0eb9a665f59e5907d7dfcd
             if(categories[i] && categories[i].name) 
                 $('#issue-list').append('<li><span class="issue">'+categories[i].name+
                     '</span> <span class="issue-count">'+categories[i].count+'</span></li>');
@@ -215,9 +242,13 @@ function toggleCalls () {
         geojson_311 = L.geoJson(json_311, {
             onEachFeature: function (feature, layer) {
                 var dateOpened = new Date(feature.properties.requested_datetime);
+<<<<<<< HEAD
                 
                 // layer.bindPopup('<strong>CaseID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_details:</strong> ' + feature.properties.service_details + '<br><strong>Request Type:</strong> ' + feature.properties.service_details + '<br><strong>Request Details:</strong> ' + feature.properties.request_details + '<br><strong>Status:</strong> ' + feature.properties.status + '<br><strong>Date Opened:</strong> ' + dateOpened);
                 layer.bindPopup('<strong>CaseID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_details:</strong> ' + feature.properties.service_details + '<br><strong>Request Type:</strong> ' + feature.properties.service_details + '<br><strong>Request Details:</strong> ' + feature.properties.request_details);
+=======
+                layer.bindPopup('<strong>Case ID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_name:</strong> ' + feature.properties.service_name + '<br><strong>Request Type:</strong> ' + feature.properties.service_subtype + '<br><strong>Request Details:</strong> ' + feature.properties.service_details + '<br><strong>Status:</strong> ' + feature.properties.status_description + '<br><strong>Date Opened:</strong> ' + dateOpened);
+>>>>>>> b53bb356fd295d3b1f0eb9a665f59e5907d7dfcd
             },
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
