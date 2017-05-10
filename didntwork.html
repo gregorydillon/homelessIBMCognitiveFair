@@ -218,7 +218,7 @@ function toggleCalls () {
                 
                 // layer.bindPopup('<strong>CaseID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_details:</strong> ' + feature.properties.service_details + '<br><strong>Request Type:</strong> ' + feature.properties.service_details + '<br><strong>Request Details:</strong> ' + feature.properties.request_details + '<br><strong>Status:</strong> ' + feature.properties.status + '<br><strong>Date Opened:</strong> ' + dateOpened);
                 // layer.bindPopup('<img style="max-height:500px;max-width:400px;" src="http://mobile311.sfgov.org/media/san_francisco/report/photos/571a538bdf8615252c0fd4c8/report.jpg">');
-                layer.bindPopup('<img style="max-height:500px;max-width:400px;" src=feature.properties.media_url + <br>/>');
+                // layer.bindPopup('<img style="max-height:500px;max-width:400px;" src=feature.properties.media_url/>');
                 var popupContent = '<img style="max-height:500px;max-width:500px;" src="http://mobile311.sfgov.org/media/san_francisco/report/photos/571a3029df8615252c0fd102/photo_20160422_070723.jpg")>';
                 layer.bindPopup(popupContent, {maxWidth: 500, closeOnClick: true});
 }
