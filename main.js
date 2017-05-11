@@ -4,6 +4,16 @@
 // chelm (https://github.com/chelm and the socrata-koop
 // project: https://github.com/chelm/koop-socrata
 
+// I'm trying to adapt this code.  https://github.com/gregorydillon
+// SF311 base url = https://data.sfgov.org/City-Infrastructure/homelessresearch/rs7u-hch9
+// API Documentation  = https://dev.socrata.com/foundry/data.sfgov.org/ktji-gk7t
+
+// But I can't get the image to display in the information popup
+// it presents as object:object rather than the url
+// problematic code seems to be throgh  current 188
+
+
+
 function toGeojson(json, locationField){
     if (!json || !json.length){
       console.log('Failed to get data');
@@ -64,7 +74,7 @@ function getOpacity(d, breaks) {
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ2QyIiwiYSI6ImJsN21qcDQifQ.wsLin0AEEsh985-FbzUPog';
 
 
-var map = L.mapbox.map('map', 'lyzidiamond.kp20mhf6').setView([37.753141, -122.43858], 11);
+var map = L.mapbox.map('map', 'lyzidiamond.kp20mhf6').setView([37.753141, -122.43858], 12);
 var callLayer = new L.layerGroup().addTo(map);
 
 var dataUrl = getDataUrl(7);
@@ -168,11 +178,19 @@ function toggleCalls () {
             onEachFeature: function (feature, layer) {
                 var dateOpened = new Date(feature.properties.requested_datetime);
                 var caseID = feature.properties.service_request_id;
-                var mediaURL = feature.properties.media_url;
+                
                 
                 // layer.bindPopup('<strong>CaseID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_details:</strong> ' + feature.properties.service_details + '<br><strong>Request Type:</strong> ' + feature.properties.service_details + '<br><strong>Request Details:</strong> ' + feature.properties.request_details + '<br><strong>Status:</strong> ' + feature.properties.status + '<br><strong>Date Opened:</strong> ' + dateOpened);
-                layer.bindPopup('<strong>CaseID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_details:</strong> ' + feature.properties.service_details + '<br><strong>Date Opened:</strong> ' + dateOpened);
-            },
+            //     layer.bindPopup('<strong>CaseID:</strong> ' + feature.properties.service_request_id + '<br><strong>service_details:</strong> ' + feature.properties.service_details + '<br><strong>Date Opened:</strong> ' + dateOpened);
+            // },
+            
+                layer.bindPopup('<img style=max-height:300px;max-width:240px; src=' + 'http://mobile311.sfgov.org/media/san_francisco/report/photos/591282551ea5e0c8db5e8223/photo_20170509_200031.jpg' + "/>");
+                // layer.bindPopup('<img style=max-height:300px;max-width:240px; scr=' + feature.properties.media_url+'/>');
+              
+                // layer.bindPopup((feature.properties.service_request_id + "  " + feature.properties.media_url))
+            
+        },
+            
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                     fillColor: '#555',
